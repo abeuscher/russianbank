@@ -1,26 +1,17 @@
 'use client';
 
-import { CardSlot } from './CardSlot';
+import Card from '@/components/Card';
 import React from 'react';
 import styles from './foundationColumn.module.scss';
+import useGameState from '@/hooks/useGameState';
 
-interface FoundationColumnProps {
-  column: CardSlot;
-}
+const FoundationColumn: React.FC<{ columnIndex: number }> = ({ columnIndex }) => {
+  const { foundations } = useGameState();
 
-const FoundationColumn: React.FC<FoundationColumnProps> = ({ column }) => {
   return (
     <div className={styles.foundationColumn}>
-      {column.getCards().map((card, index) => (
-        <div key={index} className={styles.card}>
-          {card.faceDown ? (
-            <div className={styles.faceDown}>⧠</div>
-          ) : (
-            <div className={styles.faceUp}>
-              {card.value} of {card.suit}
-            </div>
-          )}
-        </div>
+      {foundations.piles[columnIndex].map((card, index) => (
+        <Card key={`f-${columnIndex}-${index}`} card={card} />
       ))}
     </div>
   );

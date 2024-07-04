@@ -1,20 +1,25 @@
-import PropTypes from 'prop-types';
+'use client';
+
+import { Card as CardType } from '@/types';
 import React from 'react';
 import styles from './card.module.scss';
 
-const Card = ({ suit, value, faceDown }) => {
-  const cardClass = faceDown ? `${styles.card} ${styles['card-facedown']}` : `${styles.card} ${styles[`card-${suit}`]} ${styles[`card-${value}`]}`;
+interface CardProps {
+  card: CardType;
+}
+
+const Card: React.FC<CardProps> = ({ card }) => {
+  const cardClass = card.faceDown ? styles['card-facedown'] : `${styles.card} ${styles[`card-${card.suit}`]} ${styles[`card-${card.value}`]}`;
+
   return (
     <div className={cardClass}>
-      {!faceDown && <span></span>}
+      {!card.faceDown && (
+        <span>
+          {card.value} of {card.suit}
+        </span>
+      )}
     </div>
   );
-};
-
-Card.propTypes = {
-  suit: PropTypes.oneOf(['hearts', 'diamonds', 'clubs', 'spades']),
-  value: PropTypes.oneOf(['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k']),
-  faceDown: PropTypes.bool,
 };
 
 export default Card;
