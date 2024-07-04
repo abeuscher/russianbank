@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
-const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
 const generateDeck = () => {
   const deck: { id: string; value: string; suit: string; facedown: boolean }[] = [];
@@ -11,7 +11,7 @@ const generateDeck = () => {
         id: `${value}-of-${suit}-${uuidv4()}`,
         value,
         suit,
-        facedown: false,
+        facedown: true,
       });
     });
   });

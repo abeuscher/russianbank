@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Card from '@/components/gameBoard/Card';
 import React from 'react';
@@ -12,19 +12,18 @@ interface CardSlotProps {
 const CardSlot: React.FC<CardSlotProps> = ({ cards, position }) => {
   return (
     <div className={styles.cardSlot}>
-      {cards.map((card, index) => (
+      {cards.length > 0 && (
         <Card
-          key={card.id}
-          suit={card.suit}
-          value={card.value}
-          faceDown={card.facedown}
+          suit={cards[0].suit}
+          value={cards[0].value}
+          faceDown={cards[0].facedown}
           style={{
             position: 'absolute',
-            bottom: `${index * 0.2}em`,
+            bottom: '0',
             left: '0',
           }}
         />
-      ))}
+      )}
     </div>
   );
 };

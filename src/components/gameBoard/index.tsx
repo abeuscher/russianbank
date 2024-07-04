@@ -10,7 +10,7 @@ import styles from './gameBoard.module.scss';
 
 const GameBoard = () => {
   const dispatch = useAppDispatch();
-  const { playerReserve, opponentReserve, tableau } = useSelector((state: RootState) => state.game);
+  const { playerReserve, opponentReserve, tableau, foundations } = useSelector((state: RootState) => state.game);
 
   useEffect(() => {
     dispatch(initializeGame());
@@ -18,30 +18,41 @@ const GameBoard = () => {
 
   return (
     <div className={styles.gameBoard}>
-      <div className={styles.row}>
-        <CardSlot cards={playerReserve} position="playerReserve" />
-        <div className={styles.emptySlot}></div>
-        <CardSlot cards={opponentReserve} position="opponentReserve" />
-      </div>
+      <div className={styles.grid}>
+        {/* Player's Reserve */}
+        <div className={styles.playerReserve}>
+          <CardSlot cards={playerReserve} position="playerReserve" />
+        </div>
 
-      <div className={styles.tableau}>
-        {Array.from({ length: 4 }).map((_, columnIndex) => (
-          <div className={styles.column} key={columnIndex}>
-            <CardSlot cards={tableau[columnIndex]} position={`player-tableau-${columnIndex}`} />
+        {/* Player's Tableau */}
+        {tableau.slice(0, 4).map((column, columnIndex) => (
+          <div className={styles.tableauColumn} key={columnIndex}>
+            {column.map((card, rowIndex) => (
+              <CardSlot key={`player-${columnIndex}-${rowIndex}`} cards={[card]} position={`player-tableau-${columnIndex}-${rowIndex}`} />
+            ))}
           </div>
         ))}
-        <div className={styles.emptyColumn} />
+
+        {/* Foundations */}
         {Array.from({ length: 4 }).map((_, columnIndex) => (
-          <div className={styles.column} key={columnIndex + 4}>
-            <CardSlot cards={tableau[columnIndex + 4]} position={`opponent-tableau-${columnIndex}`} />
+          <div className={styles.foundationColumn} key={columnIndex}>
+            <CardSlot cards={foundations[columnIndex]} position={`foundation-${columnIndex}`} />
           </div>
         ))}
-      </div>
 
-      <div className={styles.row}>
-        <div className={styles.emptySlot}></div>
-        <div className={styles.emptySlot}></div>
-        <div className={styles.emptySlot}></div>
+        {/* Opponent's Tableau */}
+        {tableau.slice(4).map((column, columnIndex) => (
+          <div className={styles.tableauColumn} key={columnIndex + 4}>
+            {column.map((card, rowIndex) => (
+              <CardSlot key={`opponent-${columnIndex}-${rowIndex}`} cards={[card]} position={`opponent-tableau-${columnIndex}-${rowIndex}`} />
+            ))}
+          </div>
+        ))}
+
+        {/* Opponent's Reserve */}
+        <div className={styles.opponentReserve}>
+          <CardSlot cards={opponentReserve} position="opponentReserve" />
+        </div>
       </div>
     </div>
   );
