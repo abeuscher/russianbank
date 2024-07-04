@@ -3,10 +3,9 @@
 import Card from '@/components/Card';
 import React from 'react';
 import styles from '@/components/TableauColumn/tableauColumn.module.scss';
-import { useGameState } from '@/hooks/useGameState';
 
 interface TableauColumnProps {
-  column: Card[];
+  column: { id: string; value: string; suit: string; faceDown: boolean }[];
 }
 
 const TableauColumn: React.FC<TableauColumnProps> = ({ column }) => {

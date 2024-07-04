@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './cardSlot.module.scss';
 
 interface CardSlotProps {
-  cards: { id: string; value: string; suit: string; facedown: boolean }[];
+  cards: { id: string; value: string; suit: string; faceDown: boolean }[];
   position: string;
 }
 
@@ -14,14 +14,7 @@ const CardSlot: React.FC<CardSlotProps> = ({ cards, position }) => {
     <div className={styles.cardSlot}>
       {cards.length > 0 && (
         <Card
-          suit={cards[0].suit}
-          value={cards[0].value}
-          faceDown={cards[0].facedown}
-          style={{
-            position: 'absolute',
-            bottom: '0',
-            left: '0',
-          }}
+          card={cards[0]}
         />
       )}
     </div>

@@ -5,7 +5,7 @@ import React from 'react';
 import styles from '@/components/FoundationColumn/foundationColumn.module.scss';
 
 interface FoundationColumnProps {
-  column: Card[];
+  column: { id: string; value: string; suit: string; faceDown: boolean }[];
 }
 
 const FoundationColumn: React.FC<FoundationColumnProps> = ({ column }) => {
