@@ -35,8 +35,8 @@ const gameSlice = createSlice({
       state.opponent.hand = opponentDeck.slice(13);
 
       for (let i = 0; i < 4; i++) {
-        state.tableau.columns[i] = [state.player.reserve.pop()!];
-        state.tableau.columns[i + 4] = [state.opponent.reserve.pop()!];
+        state.tableau.columns[i].push(state.player.reserve.pop()!);
+        state.tableau.columns[i + 4].push(state.opponent.reserve.pop()!);
       }
     },
     moveCard: (state, action: PayloadAction<{ from: string; to: string; card: Card }>) => {

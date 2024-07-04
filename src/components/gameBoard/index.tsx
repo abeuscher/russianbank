@@ -6,9 +6,9 @@ import FoundationColumn from '@/components/FoundationColumn';
 import PlayerArea from '@/components/PlayerArea';
 import TableauColumn from '@/components/TableauColumn';
 import { initializeGame } from '@/store/gameSlice';
-import styles from './gameBoard.module.scss';
+import styles from '@/components/GameBoard/gameBoard.module.scss';
 import { useDispatch } from 'react-redux';
-import useGameState from '@/hooks/useGameState';
+import { useGameState } from '@/hooks';
 
 const GameBoard = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const GameBoard = () => {
 
         {/* Player's Tableau */}
         <div className={styles.tableauArea}>
-          {tableau.columns.slice(0, 4).map((_, columnIndex) => (
+          {tableau.columns.map((_, columnIndex) => (
             <TableauColumn key={columnIndex} columnIndex={columnIndex} />
           ))}
         </div>
@@ -42,7 +42,7 @@ const GameBoard = () => {
 
         {/* Opponent's Tableau */}
         <div className={styles.tableauArea}>
-          {tableau.columns.slice(4).map((_, columnIndex) => (
+          {tableau.columns.map((_, columnIndex) => (
             <TableauColumn key={columnIndex + 4} columnIndex={columnIndex + 4} />
           ))}
         </div>
