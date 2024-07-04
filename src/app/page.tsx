@@ -1,6 +1,6 @@
-import GameBoard from '@/components/GameBoard';
-import ReduxProvider from '@/utils/ReduxProvider';
-import styles from "./page.module.css";
+import GameBoard from '@/components/GameBoard'
+import ReduxProvider from '@/utils/ReduxProvider'
+import styles from './page.module.css'
 
 const HomePage = () => {
   return (
@@ -8,13 +8,13 @@ const HomePage = () => {
       <h1>Russian Bank Game</h1>
       <GameBoard />
     </main>
-  );
-};
+  )
+}
 
 export default function Home() {
   return (
     <ReduxProvider>
       <HomePage />
     </ReduxProvider>
-  );
+  )
 }
