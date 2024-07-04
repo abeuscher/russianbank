@@ -26,6 +26,7 @@ const initialState: GameState = {
   foundationRight: {
     columns: new Array<CardSlot>(4),
   },
+  selectedCard: null,
 };
 
 const gameSlice = createSlice({
@@ -51,8 +52,16 @@ const gameSlice = createSlice({
     moveCard: (state, action: PayloadAction<{ from: string; to: string; card: PlayingCard }>) => {
       // Implement card movement logic
     },
+    selectCard: (state, action: PayloadAction<{ columnIndex: number; slotIndex: number }>) => {
+      const { columnIndex, slotIndex } = action.payload;
+      const selectedCard = state.gameBoard[columnIndex][slotIndex].cards[state.gameBoard[columnIndex][slotIndex].cards.length - 1];
+      state.selectedCard = selectedCard;
+    },
+    deselectCard: (state) => {
+      state.selectedCard = null;
+    },
   },
 });
 
-export const { initializeGame, moveCard } = gameSlice.actions;
+export const { initializeGame, selectCard, deselectCard } = gameSlice.actions;
 export default gameSlice.reducer;

@@ -1,22 +1,43 @@
 'use client'
 
-import { PlayingCard as CardType } from '@/types'
+import { deselectCard, selectCard } from '@/store/gameSlice'
+
 import PlayingCard from '@/components/PlayingCard'
+import { PlayingCard as PlayingCardType } from '@/types'
 import React from 'react'
 import styles from '@/components/CardSlot/cardSlot.module.scss'
+import { useDispatch } from 'react-redux'
 
-interface CardSlotType {
-  cards: CardType[]
+interface CardSlotProps {
+  columnIndex: number
+  slotIndex: number
+  cards: PlayingCardType[]
 }
 
-const CardSlot: React.FC<CardSlotType> = ({ cards }) => {
-  if (!cards) return <div className={styles.emptySlot} />
-  if (cards.length === 0 || !Array.isArray(cards)) return <div className={styles.emptySlot} />
+const CardSlot: React.FC<CardSlotProps> = ({ columnIndex, slotIndex, cards }) => {
+  const dispatch = useDispatch()
+
+  const handleCardClick = () => {
+    dispatch(selectCard({ columnIndex, slotIndex }))
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    dispatch(selectCard({ columnIndex, slotIndex }))
+  }
+
+  const handleMouseUp = () => {
+    dispatch(deselectCard())
+  }
 
   return (
-    <div className={styles.cardSlot}>
+    <div className={styles.cardSlot} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       {cards.map((card, index) => (
-        <PlayingCard key={index} card={card} />
+        <PlayingCard
+          key={`${columnIndex}-${slotIndex}-${index}`}
+          card={card}
+          onClick={handleCardClick}
+        />
       ))}
     </div>
   )

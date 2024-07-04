@@ -29,4 +29,5 @@ export interface PlayingCard {
     foundationLeft: Foundation;
     foundationRight: Foundation;
     tableauRight: Tableau;
+    selectedCard: PlayingCard | null
   }
