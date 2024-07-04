@@ -5,13 +5,13 @@ import React from 'react';
 import styles from '@/components/TableauColumn/tableauColumn.module.scss';
 
 interface TableauColumnProps {
-  column: { id: string; value: string; suit: string; faceDown: boolean }[];
+  columns: { id: string; value: string; suit: string; faceDown: boolean }[];
 }
 
-const TableauColumn: React.FC<TableauColumnProps> = ({ column }) => {
+const TableauColumn: React.FC<TableauColumnProps> = ({ columns }) => {
   return (
     <div className={styles.tableauColumn}>
-      {column.map((card, rowIndex) => (
+      {columns.map((card, rowIndex) => (
         <Card key={`${rowIndex}`} card={card} />
       ))}
     </div>

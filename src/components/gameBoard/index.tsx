@@ -12,8 +12,8 @@ import { useGameState } from '@/hooks';
 
 const GameBoard = () => {
   const dispatch = useDispatch();
-  const { player, opponent, tableau, foundations } = useGameState();
-
+  const { player, opponent, tableauLeft, tableauRight, foundationLeft, foundationRight } = useGameState();
+  console.log(tableauLeft);
   useEffect(() => {
     dispatch(initializeGame());
   }, [dispatch]);
@@ -21,36 +21,23 @@ const GameBoard = () => {
   return (
     <div className={styles.gameBoard}>
       <div className={styles.grid}>
-        {/* Player's Area */}
-        <div className={styles.playerArea}>
-          <PlayerArea />
-        </div>
-
-        {/* Player's Tableau */}
-        <div className={styles.tableauArea}>
-          {tableau.columns.map((column, columnIndex) => (
-            <TableauColumn key={columnIndex} column={column} />
-          ))}
-        </div>
-
-        {/* Foundations */}
-        <div className={styles.foundationArea}>
-          {foundations.piles.map((pile, columnIndex) => (
-            <FoundationColumn key={columnIndex} column={pile} />
-          ))}
-        </div>
-
-        {/* Opponent's Tableau */}
-        <div className={styles.tableauArea}>
-          {tableau.columns.map((column, columnIndex) => (
-            <TableauColumn key={columnIndex + 4} column={column} />
-          ))}
-        </div>
 
         {/* Opponent's Area */}
         <div className={styles.opponentArea}>
           <PlayerArea />
         </div>
+
+        <div className={styles.playArea}>
+            <TableauColumn columns={tableauLeft.columns.flat()} />
+            <FoundationColumn columns={foundationLeft.columns.flat()} />
+            <FoundationColumn columns={foundationRight.columns.flat()} />
+            <TableauColumn columns={tableauRight.columns.flat()} />
+        </div>
+        {/* Player's Area */}
+        <div className={styles.playerArea}>
+          <PlayerArea />
+        </div>
+
       </div>
     </div>
   );

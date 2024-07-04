@@ -14,11 +14,17 @@ const initialState: GameState = {
     hand: [],
     waste: [],
   },
-  tableau: {
-    columns: Array.from({ length: 8 }, () => []),
+  tableauLeft: {
+    columns: Array.from({ length: 4 }, () => []),
   },
-  foundations: {
-    piles: Array.from({ length: 4 }, () => []),
+  foundationLeft: {
+    columns: Array.from({ length: 4 }, () => []),
+  },
+  foundationRight: {
+    columns: Array.from({ length: 4 }, () => []),
+  },
+  tableauRight: {
+    columns: Array.from({ length: 4 }, () => []),
   },
 };
 
@@ -35,8 +41,8 @@ const gameSlice = createSlice({
       state.opponent.hand = opponentDeck.slice(13);
 
       for (let i = 0; i < 4; i++) {
-        state.tableau.columns[i].push(state.player.reserve.pop()!);
-        state.tableau.columns[i + 4].push(state.opponent.reserve.pop()!);
+        state.tableauLeft.columns[i] = [Object.assign(state.player.hand.pop()!, { faceDown: false })];
+        state.tableauRight.columns[i] = [Object.assign(state.opponent.hand.pop()!, { faceDown: false })];
       }
     },
     moveCard: (state, action: PayloadAction<{ from: string; to: string; card: Card }>) => {

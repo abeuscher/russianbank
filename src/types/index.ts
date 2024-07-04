@@ -10,7 +10,7 @@ export interface Card {
   }
   
   export interface Foundation {
-    piles: Card[][];
+    columns: Card[][];
   }
   
   export interface PlayerState {
@@ -22,6 +22,8 @@ export interface Card {
   export interface GameState {
     player: PlayerState;
     opponent: PlayerState;
-    tableau: Tableau;
-    foundations: Foundation;
+    tableauLeft: Tableau;
+    foundationLeft: Foundation;
+    foundationRight: Foundation;
+    tableauRight: Tableau;
   }

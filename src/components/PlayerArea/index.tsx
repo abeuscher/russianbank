@@ -7,7 +7,7 @@ import { useGameState } from '@/hooks';
 
 const PlayerArea: React.FC = () => {
   const { player } = useGameState();
-
+  console.log("Player Area", player )
   return (
     <div className={styles.playerArea}>
       <div className={styles.row}>
