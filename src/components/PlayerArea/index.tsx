@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import Card from '@/components/Card';
-import React from 'react';
-import styles from './playerArea.module.scss';
-import { useGameState } from '@/hooks';
+import Card from '@/components/PlayingCard'
+import React from 'react'
+import styles from './playerArea.module.scss'
+import { useGameState } from '@/hooks'
 
 const PlayerArea: React.FC = () => {
-  const { player } = useGameState();
-  console.log("Player Area", player )
+  const { player } = useGameState()
+  console.log('Player Area', player)
   return (
     <div className={styles.playerArea}>
       <div className={styles.row}>
@@ -24,7 +24,7 @@ const PlayerArea: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PlayerArea;
+export default PlayerArea

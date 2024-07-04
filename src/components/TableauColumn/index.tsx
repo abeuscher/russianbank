@@ -1,18 +1,16 @@
 'use client';
 
-import Card from '@/components/Card';
+import CardSlot from '@/components/CardSlot';
 import React from 'react';
+import { Tableau } from '@/types';
 import styles from '@/components/TableauColumn/tableauColumn.module.scss';
 
-interface TableauColumnProps {
-  columns: { id: string; value: string; suit: string; faceDown: boolean }[];
-}
+const TableauColumn: React.FC<Tableau> = ({ columns }) => {
 
-const TableauColumn: React.FC<TableauColumnProps> = ({ columns }) => {
   return (
     <div className={styles.tableauColumn}>
-      {columns.map((card, rowIndex) => (
-        <Card key={`${rowIndex}`} card={card} />
+      {columns.map((cards, slotIndex) => (
+        <CardSlot key={`${slotIndex}`} cards={cards} />
       ))}
     </div>
   );

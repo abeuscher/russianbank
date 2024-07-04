@@ -1,24 +1,25 @@
-'use client';
+'use client'
 
-import Card from '@/components/Card';
-import React from 'react';
-import styles from './cardSlot.module.scss';
+import { PlayingCard as CardType } from '@/types'
+import PlayingCard from '@/components/PlayingCard'
+import React from 'react'
+import styles from '@/components/CardSlot/cardSlot.module.scss'
 
-interface CardSlotProps {
-  cards: { id: string; value: string; suit: string; faceDown: boolean }[];
-  position: string;
+interface CardSlotType {
+  cards: CardType[]
 }
 
-const CardSlot: React.FC<CardSlotProps> = ({ cards, position }) => {
+const CardSlot: React.FC<CardSlotType> = ({ cards }) => {
+  if (!cards) return <div className={styles.emptySlot} />
+  if (cards.length === 0 || !Array.isArray(cards)) return <div className={styles.emptySlot} />
+
   return (
     <div className={styles.cardSlot}>
-      {cards.length > 0 && (
-        <Card
-          card={cards[0]}
-        />
-      )}
+      {cards.map((card, index) => (
+        <PlayingCard key={index} card={card} />
+      ))}
     </div>
-  );
-};
+  )
+}
 
-export default CardSlot;
+export default CardSlot
