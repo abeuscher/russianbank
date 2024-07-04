@@ -1,0 +1,44 @@
+.gameBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playerArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.reserve {
+  display: flex;
+  flex-direction: row;
+}
+
+.tableau {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.emptySlot {
+  width: 5em;
+  height: 7em;
+  margin: 0.3em;
+  background-color: #ccc;
+  border: 0.07em solid #666;
+  border-radius: 0.3em;
+}
