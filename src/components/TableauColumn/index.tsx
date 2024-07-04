@@ -2,16 +2,18 @@
 
 import Card from '@/components/Card';
 import React from 'react';
-import styles from './tableauColumn.module.scss';
-import { useGameState } from '@/hooks';
+import styles from '@/components/TableauColumn/tableauColumn.module.scss';
+import { useGameState } from '@/hooks/useGameState';
 
-const TableauColumn: React.FC<{ columnIndex: number }> = ({ columnIndex }) => {
-  const { tableau } = useGameState();
+interface TableauColumnProps {
+  column: Card[];
+}
 
+const TableauColumn: React.FC<TableauColumnProps> = ({ column }) => {
   return (
     <div className={styles.tableauColumn}>
-      {tableau.columns[columnIndex].map((card, rowIndex) => (
-        <Card key={`${columnIndex}-${rowIndex}`} card={card} />
+      {column.map((card, rowIndex) => (
+        <Card key={`${rowIndex}`} card={card} />
       ))}
     </div>
   );

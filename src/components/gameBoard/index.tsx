@@ -28,22 +28,22 @@ const GameBoard = () => {
 
         {/* Player's Tableau */}
         <div className={styles.tableauArea}>
-          {tableau.columns.map((_, columnIndex) => (
-            <TableauColumn key={columnIndex} columnIndex={columnIndex} />
+          {tableau.columns.map((column, columnIndex) => (
+            <TableauColumn key={columnIndex} column={column} />
           ))}
         </div>
 
         {/* Foundations */}
         <div className={styles.foundationArea}>
-          {foundations.piles.map((_, columnIndex) => (
-            <FoundationColumn key={columnIndex} columnIndex={columnIndex} />
+          {foundations.piles.map((pile, columnIndex) => (
+            <FoundationColumn key={columnIndex} column={pile} />
           ))}
         </div>
 
         {/* Opponent's Tableau */}
         <div className={styles.tableauArea}>
-          {tableau.columns.map((_, columnIndex) => (
-            <TableauColumn key={columnIndex + 4} columnIndex={columnIndex + 4} />
+          {tableau.columns.map((column, columnIndex) => (
+            <TableauColumn key={columnIndex + 4} column={column} />
           ))}
         </div>
 

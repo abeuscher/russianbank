@@ -2,16 +2,17 @@
 
 import Card from '@/components/Card';
 import React from 'react';
-import styles from './foundationColumn.module.scss';
-import useGameState from '@/hooks/useGameState';
+import styles from '@/components/FoundationColumn/foundationColumn.module.scss';
 
-const FoundationColumn: React.FC<{ columnIndex: number }> = ({ columnIndex }) => {
-  const { foundations } = useGameState();
+interface FoundationColumnProps {
+  column: Card[];
+}
 
+const FoundationColumn: React.FC<FoundationColumnProps> = ({ column }) => {
   return (
     <div className={styles.foundationColumn}>
-      {foundations.piles[columnIndex].map((card, index) => (
-        <Card key={`f-${columnIndex}-${index}`} card={card} />
+      {column.map((card, index) => (
+        <Card key={`${index}`} card={card} />
       ))}
     </div>
   );
