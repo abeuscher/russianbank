@@ -4,13 +4,16 @@ import React, { useEffect } from 'react';
 import { RootState, useAppDispatch } from '@/store';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CardSlot from '@/components/gameBoard/CardSlot';
+import CardSlot from '@/components/CardSlot';
+import { CardSlotData } from '@/types/CardSlotData';
+import PlayerArea from '@/components/PlayerArea';
+import TableauColumn from '@/components/TableauColumn';
 import { initializeGame } from '@/store/gameSlice';
 import styles from './gameBoard.module.scss';
 
 const GameBoard = () => {
   const dispatch = useAppDispatch();
-  const { playerReserve, opponentReserve, tableau, foundations } = useSelector((state: RootState) => state.game);
+  const { playerReserve, opponentReserve, tableau, foundations, playerHand, playerWaste, opponentHand, opponentWaste } = useSelector((state: RootState) => state.game);
 
   useEffect(() => {
     dispatch(initializeGame());
@@ -19,40 +22,25 @@ const GameBoard = () => {
   return (
     <div className={styles.gameBoard}>
       <div className={styles.grid}>
-        {/* Player's Reserve */}
-        <div className={styles.playerReserve}>
-          <CardSlot cards={playerReserve} position="playerReserve" />
-        </div>
+        <PlayerArea reserve={new CardSlotData(playerReserve)} hand={new CardSlotData(playerHand)} waste={new CardSlotData(playerWaste)} />
 
-        {/* Player's Tableau */}
         {tableau.slice(0, 4).map((column, columnIndex) => (
-          <div className={styles.tableauColumn} key={columnIndex}>
-            {column.map((card, rowIndex) => (
-              <CardSlot key={`player-${columnIndex}-${rowIndex}`} cards={[card]} position={`player-tableau-${columnIndex}-${rowIndex}`} />
-            ))}
-          </div>
+          <TableauColumn key={columnIndex} column={column} />
         ))}
 
-        {/* Foundations */}
-        {Array.from({ length: 4 }).map((_, columnIndex) => (
-          <div className={styles.foundationColumn} key={columnIndex}>
-            <CardSlot cards={foundations[columnIndex]} position={`foundation-${columnIndex}`} />
-          </div>
-        ))}
-
-        {/* Opponent's Tableau */}
-        {tableau.slice(4).map((column, columnIndex) => (
-          <div className={styles.tableauColumn} key={columnIndex + 4}>
-            {column.map((card, rowIndex) => (
-              <CardSlot key={`opponent-${columnIndex}-${rowIndex}`} cards={[card]} position={`opponent-tableau-${columnIndex}-${rowIndex}`} />
-            ))}
-          </div>
-        ))}
-
-        {/* Opponent's Reserve */}
-        <div className={styles.opponentReserve}>
-          <CardSlot cards={opponentReserve} position="opponentReserve" />
+        <div className={styles.foundationArea}>
+          {foundations.map((foundationColumn, columnIndex) => (
+            <div key={columnIndex} className={styles.foundationColumn}>
+              <CardSlot cards={foundationColumn} />
+            </div>
+          ))}
         </div>
+
+        {tableau.slice(4).map((column, columnIndex) => (
+          <TableauColumn key={columnIndex + 4} column={column} />
+        ))}
+
+        <PlayerArea reserve={new CardSlotData(opponentReserve)} hand={new CardSlotData(opponentHand)} waste={new CardSlotData(opponentWaste)} />
       </div>
     </div>
   );

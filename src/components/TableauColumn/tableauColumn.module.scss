@@ -1,0 +1,38 @@
+.tableauColumn {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card {
+    width: 5em;
+    height: 7em;
+    margin: 0.3em;
+    background-color: #f6f6f6;
+    border-width: 0.07em;
+    border-style: solid;
+    border-color: #666;
+    border-radius: 0.3em;
+    box-shadow: 0.07em 0.07em 0.07em 0.07em rgba(20, 20, 20, 0.4);
+  }
+  
+  .faceDown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #cccc99;
+    color: #998877;
+    font-size: 1em;
+    line-height: 5em;
+    border: 0.15em dashed #b1885f;
+    border-radius: 0.3em;
+  }
+  
+  .faceUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-weight: bold;
+    color: #000;
+  }

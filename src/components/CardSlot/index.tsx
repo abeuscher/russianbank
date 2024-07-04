@@ -1,6 +1,6 @@
 'use client';
 
-import Card from '@/components/gameBoard/Card';
+import Card from '@/components/Card';
 import React from 'react';
 import styles from './cardSlot.module.scss';
 
