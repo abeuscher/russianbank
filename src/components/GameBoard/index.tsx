@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 
 import CardSlot from '@/components/CardSlot'
 import FoundationColumn from '@/components/FoundationColumn'
-import PlayerArea from '@/components/PlayerArea'
 import TableauColumn from '@/components/TableauColumn'
 import { initializeGame } from '@/store/gameSlice'
 import styles from '@/components/GameBoard/gameBoard.module.scss'
@@ -25,9 +24,9 @@ const GameBoard = () => {
       <div className={styles.grid}>
         {/* Opponent's Area */}
         <div className={styles.playerArea}>
-          <CardSlot cards={opponent.reserve} />
-          <CardSlot cards={opponent.waste} />
-          <CardSlot cards={opponent.hand} />
+          <CardSlot cards={opponent.reserve.cards} />
+          <CardSlot cards={opponent.waste.cards} />
+          <CardSlot cards={opponent.hand.cards} />
         </div>
         <div className={styles.playArea}>
           <TableauColumn columns={tableauLeft.columns} />
@@ -37,9 +36,9 @@ const GameBoard = () => {
         </div>
         {/* Player's Area */}
         <div className={styles.playerArea}>
-          <CardSlot cards={player.hand} />
-          <CardSlot cards={player.waste} />
-          <CardSlot cards={player.reserve} />
+          <CardSlot cards={player.hand.cards} />
+          <CardSlot cards={player.waste.cards} />
+          <CardSlot cards={player.reserve.cards} />
         </div>
       </div>
     </div>

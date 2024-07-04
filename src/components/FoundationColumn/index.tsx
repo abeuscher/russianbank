@@ -1,15 +1,19 @@
 'use client'
 
 import CardSlot from '@/components/CardSlot'
-import { Foundation } from '@/types'
+import { CardSlot as CardSlotType } from '@/types'
 import React from 'react'
 import styles from '@/components/FoundationColumn/foundationColumn.module.scss'
 
-const FoundationColumn: React.FC<Foundation> = ({ columns }) => {
+interface FoundationColumnProps {
+  columns: CardSlotType[]
+}
+
+const FoundationColumn: React.FC<FoundationColumnProps> = ({ columns }) => {
   return (
     <div className={styles.foundationColumn}>
-      {columns.map((slot, slotIndex) => (
-        <CardSlot key={`${slotIndex}`} cards={slot} />
+      {columns.map((cardSlot, index) => (
+        <CardSlot key={`foundation-${index}`} cards={cardSlot.cards} />
       ))}
     </div>
   )

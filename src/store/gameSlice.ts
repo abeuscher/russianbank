@@ -1,30 +1,30 @@
-import { Card, CardSlot, Foundation, GameState, PlayerState, Tableau } from '@/types';
+import { CardSlot, GameState, PlayingCard } from '@/types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { initializeDecks } from '@/utils/InitializeDeck';
 
 const initialState: GameState = {
   player: {
-    reserve: [],
-    hand: [],
-    waste: [],
+    reserve: {cards: new Array<PlayingCard>()},
+    hand: {cards: new Array<PlayingCard>()},
+    waste: {cards: new Array<PlayingCard>()},
   },
   opponent: {
-    reserve: [],
-    hand: [],
-    waste: [],
+    reserve: {cards: new Array<PlayingCard>()},
+    hand:{cards: new Array<PlayingCard>()},
+    waste:{cards: new Array<PlayingCard>()},
   },
   tableauLeft: {
-    columns: [],
+    columns: new Array<CardSlot>(4),
   },
   tableauRight: {
-    columns: [],
+    columns: new Array<CardSlot>(4),
   },
   foundationLeft: {
-    columns: [],
+    columns: new Array<CardSlot>(4),
   },
   foundationRight: {
-    columns: [],
+    columns: new Array<CardSlot>(4),
   },
 };
 
@@ -35,21 +35,20 @@ const gameSlice = createSlice({
     initializeGame: (state) => {
       const { playerDeck, opponentDeck } = initializeDecks();
 
-      state.player.reserve = playerDeck.slice(0, 13);
-      state.player.reserve[0].faceDown = false;
-      state.player.hand = playerDeck.slice(13);
-      state.opponent.reserve = opponentDeck.slice(0, 13);
-      state.opponent.reserve[0].faceDown = false;
-      state.opponent.hand = opponentDeck.slice(13);
+      state.player.reserve = {cards: playerDeck.slice(0, 13) };
+      state.player.reserve.cards[0].faceDown = false;
+      state.player.hand = {cards:playerDeck.slice(13)};
+      state.opponent.reserve = {cards:opponentDeck.slice(0, 13)};
+      state.opponent.reserve.cards[0].faceDown = false;
+      state.opponent.hand = {cards: opponentDeck.slice(13) };
 
       for (let i = 0; i < 4; i++) {
-          state.tableauLeft.columns[i] = [Object.assign(state.player.reserve.pop()!,{faceDown:false})];
-          state.tableauRight.columns[i] = [Object.assign(state.opponent.reserve.pop()!,{faceDown:false})];
+          state.tableauLeft.columns[i] = {cards: [Object.assign(state.player.reserve.cards.pop()!,{faceDown:false})]};
+          state.tableauRight.columns[i] = {cards: [Object.assign(state.opponent.reserve.cards.pop()!,{faceDown:false})]};
       }
-      state.foundationLeft.columns = new Array<CardSlot>(4);
-      state.foundationRight.columns = new Array<CardSlot>(4);
+
     },
-    moveCard: (state, action: PayloadAction<{ from: string; to: string; card: Card }>) => {
+    moveCard: (state, action: PayloadAction<{ from: string; to: string; card: PlayingCard }>) => {
       // Implement card movement logic
     },
   },

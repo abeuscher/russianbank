@@ -17,9 +17,9 @@ export interface PlayingCard {
   }
   
   export interface PlayerState {
-    reserve: PlayingCard[];
-    hand: PlayingCard[];
-    waste: PlayingCard[];
+    reserve: CardSlot;
+    hand: CardSlot;
+    waste: CardSlot;
   }
  
   export interface GameState {
