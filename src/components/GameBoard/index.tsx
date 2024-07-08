@@ -24,9 +24,9 @@ const GameBoard = () => {
       <div className={styles.grid}>
         {/* Opponent's Area */}
         <div className={styles.playerArea}>
-          <CardSlot cards={opponent.reserve.cards} />
-          <CardSlot cards={opponent.waste.cards} />
-          <CardSlot cards={opponent.hand.cards} />
+          <CardSlot cards={opponent.reserve.cards} faceDown={false} />
+          <CardSlot cards={opponent.waste.cards} faceDown={false} />
+          <CardSlot cards={opponent.hand.cards} faceDown={true} />
         </div>
         <div className={styles.playArea}>
           <TableauColumn columns={tableauLeft.columns} />
@@ -36,9 +36,9 @@ const GameBoard = () => {
         </div>
         {/* Player's Area */}
         <div className={styles.playerArea}>
-          <CardSlot cards={player.hand.cards} />
-          <CardSlot cards={player.waste.cards} />
-          <CardSlot cards={player.reserve.cards} />
+          <CardSlot cards={player.reserve.cards} faceDown={true} />
+          <CardSlot cards={player.waste.cards} faceDown={false} />
+          <CardSlot cards={player.hand.cards} faceDown={false} />
         </div>
       </div>
     </div>

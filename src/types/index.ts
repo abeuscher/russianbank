@@ -2,10 +2,10 @@ export interface PlayingCard {
     id: string;
     value: string;
     suit: string;
-    faceDown: boolean;
   }
   export interface CardSlot {
     cards: PlayingCard[];
+    faceDown: boolean;
   }
 
   export interface Tableau {
@@ -30,4 +30,6 @@ export interface PlayingCard {
     foundationRight: Foundation;
     tableauRight: Tableau;
     selectedCard: PlayingCard | null
+    draggedCard: PlayingCard | null
+    dragTarget: CardSlot | null
   }

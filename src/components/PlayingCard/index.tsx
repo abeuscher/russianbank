@@ -2,24 +2,29 @@
 
 import { PlayingCard as CardType } from '@/types'
 import React from 'react'
-import styles from './playingCard.module.scss'
+import styles from '@/components/PlayingCard/playingCard.module.scss'
+import { useDrag } from 'react-dnd'
 
 interface CardProps {
   card: CardType
+  className?: string
 }
 
-const PlayingCard: React.FC<CardProps> = ({ card }) => {
-  const cardClass = card.faceDown
-    ? styles['card-facedown']
-    : `${styles.card} ${styles[`card-${card.suit}`]} ${styles[`card-${card.value}`]}`
+const PlayingCard: React.FC<CardProps> = ({ card, className }) => {
+  const [{ opacity }, drag] = useDrag(
+    () => ({
+      type: 'CARD',
+      item: { card: card },
+      collect: (monitor) => ({
+        opacity: monitor.isDragging() ? 0.4 : 1
+      })
+    }),
+    [card]
+  )
 
   return (
-    <div className={cardClass}>
-      {!card.faceDown && (
-        <span>
-          {card.value} of {card.suit}
-        </span>
-      )}
+    <div ref={drag} className={className} title={`${card.value} of ${card.suit}`}>
+      <span></span>
     </div>
   )
 }
