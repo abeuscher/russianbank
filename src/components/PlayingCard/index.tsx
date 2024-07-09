@@ -23,7 +23,7 @@ const PlayingCard: React.FC<CardProps> = ({ card, className }) => {
   )
 
   return (
-    <div ref={drag} className={className} title={`${card.value} of ${card.suit}`}>
+    <div ref={drag} className={className}>
       <span></span>
     </div>
   )

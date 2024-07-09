@@ -6,14 +6,17 @@ export interface PlayingCard {
   export interface CardSlot {
     cards: PlayingCard[];
     faceDown: boolean;
+    slotId: string;
   }
 
   export interface Tableau {
     columns: CardSlot[];
+    columnId: string;
   }
   
   export interface Foundation {
     columns: CardSlot[];
+    columnId: string;
   }
   
   export interface PlayerState {

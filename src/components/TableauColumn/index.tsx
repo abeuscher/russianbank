@@ -5,14 +5,16 @@ import { CardSlot as CardSlotType } from '@/types'
 import { Tableau } from '@/types'
 import styles from '@/components/TableauColumn/tableauColumn.module.scss'
 
-interface TableauColumnProps {
-  columns: CardSlotType[]
-}
-const TableauColumn: React.FC<Tableau> = ({ columns }) => {
+const TableauColumn: React.FC<Tableau> = ({ columns, columnId }) => {
   return (
     <div className={styles.tableauColumn}>
       {columns.map((cardSlot, index) => (
-        <CardSlot key={`tableau-${index}`} cards={cardSlot.cards} />
+        <CardSlot
+          key={`${columnId}-${index}`}
+          slotId={`${columnId}-${index}`}
+          cards={cardSlot.cards}
+          faceDown={false}
+        />
       ))}
     </div>
   )
